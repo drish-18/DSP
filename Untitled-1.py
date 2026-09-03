@@ -3,54 +3,31 @@ class Node:
         self.data = data
         self.next = None
 
-
-class LinkedList:
+class CircularLinkedList:
     def __init__(self):
         self.head = None
 
-    def insert_at_beginning(self, data):
+    def append(self, data):
         new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
-
-    def insert_at_end(self, data):
-        new_node = Node(data)
-
-        if self.head is None:
+        if not self.head:
             self.head = new_node
+            new_node.next = self.head  
             return
 
         temp = self.head
-        while temp.next:
+        while temp.next != self.head:  
             temp = temp.next
-
+        
         temp.next = new_node
-
+        new_node.next = self.head    
     def display(self):
-        if self.head is None:
-            print("List is empty")
+        if not self.head:
             return
-
+        
         temp = self.head
-        while temp:
+        while True:
             print(temp.data, end=" -> ")
             temp = temp.next
-        print("None")
-
-
-if __name__ == "__main__":
-    l1 = LinkedList()
-
-    
-    l1.insert_at_end(10)
-    l1.insert_at_end(20)
-    l1.insert_at_end(30)
-
-    print("Linked List after inserting at end:")
-    l1.display()
-
-
-    l1.insert_at_beginning(5)
-
-    print("Linked List after inserting at beginning:")
-    l1.display()
+            if temp == self.head:   
+                break
+        print("(Back to Head)")
