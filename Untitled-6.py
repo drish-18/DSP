@@ -6,15 +6,12 @@ class Node:
 
 
 def insert(root, key):
-    # If tree is empty, create a new node
     if root is None:
         return Node(key)
 
-    # Insert into left subtree
     if key < root.key:
         root.left = insert(root.left, key)
 
-    # Insert into right subtree
     elif key > root.key:
         root.right = insert(root.right, key)
 
@@ -28,15 +25,34 @@ def inorder(root):
         inorder(root.right)
 
 
-# Create an empty BST
+def preorder(root):
+    if root:
+        print(root.key, end=" ")
+        preorder(root.left)
+        preorder(root.right)
+
+
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.key, end=" ")
+
 root = None
 
-# Insert elements
 values = [50, 30, 70, 20, 40, 60, 80]
 
 for value in values:
     root = insert(root, value)
 
-# Display BST using inorder traversal
-print("Inorder Traversal:")
+print("Inorder Traversal (Left, Root, Right):")
 inorder(root)
+print("\n")
+
+print("Preorder Traversal (Root, Left, Right):")
+preorder(root)
+print("\n")
+
+print("Postorder Traversal (Left, Right, Root):")
+postorder(root)
+print()
